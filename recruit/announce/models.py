@@ -10,6 +10,7 @@ class Company(models.Model):
     name = models.CharField(max_length=255, unique=True)
     country = models.CharField(max_length=30)
     region = models.CharField(max_length=30)
+    introduce = models.TextField(null=True, blank=True)
 
 
 class Announcement(TimeStampedModel):
@@ -17,7 +18,7 @@ class Announcement(TimeStampedModel):
     position = models.CharField(max_length=255)
     credit = models.IntegerField()
     description = models.TextField()
-    technology = models.CharField()
+    technology = models.CharField(max_length=255)
 
 
 class Register(TimeStampedModel):
