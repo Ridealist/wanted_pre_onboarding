@@ -7,7 +7,10 @@ from .models import Apply
 class ApplySerializer(serializers.ModelSerializer):
     class Meta:
         model = Apply
-        fields = "__all__"
+        fields = [
+            "announce",
+            "applicant",
+        ]
         validators = [
             UniqueTogetherValidator(
                 queryset=Apply.objects.all(), fields=["announce", "applicant"]
