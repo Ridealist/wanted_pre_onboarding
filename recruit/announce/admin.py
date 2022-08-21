@@ -1,3 +1,4 @@
 from django.contrib import admin
+from recruit.announce.models import Company, Announcement
 
-# Register your models here.
+admin.site.register([Company, Announcement])

@@ -1,9 +1,5 @@
 from django_extensions.db.models import TimeStampedModel
 from django.db import models
-from django.contrib.auth import get_user_model
-from django.db.models.constraints import UniqueConstraint
-
-User = get_user_model()
 
 
 class Company(models.Model):
@@ -11,6 +7,9 @@ class Company(models.Model):
     country = models.CharField(max_length=30)
     region = models.CharField(max_length=30)
     introduce = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Announcement(TimeStampedModel):
@@ -20,15 +19,5 @@ class Announcement(TimeStampedModel):
     description = models.TextField()
     technology = models.CharField(max_length=255)
 
-
-class Register(TimeStampedModel):
-    announce = models.ForeignKey(Announcement, on_delete=models.CASCADE)
-    applicant = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    class Meta:
-        constraints = [
-            UniqueConstraint(
-                fields=["announce", "applicant"],
-                name="unique_register",
-            )
-        ]
+    def __str__(self):
+        return f"{self.company.name} | {self.position} | {self.technology}"
