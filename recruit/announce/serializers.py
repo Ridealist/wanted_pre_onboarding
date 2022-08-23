@@ -5,7 +5,11 @@ from recruit.announce.models import Announcement, Company
 class CompanySerializer(serializers.ModelSerializer):
     class Meta:
         model = Company
-        fields = "__all__"
+        fields = [
+            "name",
+            "country",
+            "region",
+        ]
 
 
 class AnnounceRegisterSerializer(serializers.ModelSerializer):
@@ -36,7 +40,7 @@ class AnnounceListSerializer(serializers.ModelSerializer):
 
 class AnnounceDetailSerializer(serializers.ModelSerializer):
     company = CompanySerializer(read_only=True)
-    additional = serializers.SerializerMethodField()
+    announce_set = serializers.SerializerMethodField()
 
     class Meta:
         model = Announcement
@@ -47,10 +51,10 @@ class AnnounceDetailSerializer(serializers.ModelSerializer):
             "credit",
             "technology",
             "description",
-            "additional",
+            "announce_set",
         ]
 
-    def get_additional(self, obj):
+    def get_announce_set(self, obj):
         queryset = Announcement.objects.filter(company=obj.company).exclude(
             id=obj.id
         )
