@@ -8,3 +8,6 @@ djangorestframework>=3.12.4,<3.13
 # Test
 coverage>=6.4.4,<6.5
 factory_boy>=3.2.1,<3.3
+
+# Open-API
+drf-spectacular>=0.23.1,<0.24
