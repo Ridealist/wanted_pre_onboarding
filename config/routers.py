@@ -1,16 +1,14 @@
-from django.conf import settings
 from django.urls import include, path
-from rest_framework.routers import DefaultRouter, SimpleRouter
+from rest_framework.routers import DefaultRouter
 
 from recruit.announce.views import AnnouncementViewSet
+from recruit.apply.views import ApplyViewSet
 
-if settings.DEBUG:
-    router = DefaultRouter()
-else:
-    router = SimpleRouter()
+router = DefaultRouter()
 
 
-router.register("announce", AnnouncementViewSet, basename="announce")
+router.register("announce", AnnouncementViewSet, basename="Announce")
+router.register("apply", ApplyViewSet, basename="Apply")
 
 app_name = "api"
 
